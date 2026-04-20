@@ -1,0 +1,451 @@
+@font-face {
+  font-family: 'Joseon100Years';
+  src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/ChosunCentennial.woff2') format('woff2');
+  font-weight: normal;
+  font-display: swap;
+}
+
+.start-shell {
+  --stage-scale: 1;
+  --pointer-x: 0;
+  --pointer-y: 0;
+  --motion-factor: 1;
+  --backdrop-image: none;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 33%, rgba(96, 84, 52, 0.14) 0%, rgba(0, 0, 0, 0) 34%),
+    linear-gradient(180deg, #0a0c0b 0%, #040404 100%);
+  color: #f5f0e6;
+}
+
+.shell-backdrop {
+  position: absolute;
+  inset: -8%;
+  z-index: -4;
+  pointer-events: none;
+  background-image: var(--backdrop-image);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 0.24;
+  filter: blur(30px) brightness(0.18) saturate(0.72) contrast(0.98);
+  transform:
+    translate3d(
+      calc(var(--pointer-x) * 6px * var(--motion-factor)),
+      calc(var(--pointer-y) * 6px * var(--motion-factor)),
+      0
+    )
+    scale(1.12);
+  transition:
+    opacity 600ms ease,
+    filter 600ms ease,
+    transform 600ms ease;
+}
+
+.start-shell.is-mounted .shell-backdrop {
+  opacity: 0.32;
+  filter: blur(28px) brightness(0.16) saturate(0.74) contrast(1);
+}
+
+.start-shell.reduce-motion {
+  --motion-factor: 0;
+}
+
+.start-stage {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 1440px;
+  height: 1024px;
+  overflow: hidden;
+  transform: scale(var(--stage-scale));
+  transform-origin: center center;
+  isolation: isolate;
+  background: #040504;
+  box-shadow: 0 30px 120px rgba(0, 0, 0, 0.34);
+  z-index: 1;
+}
+
+.start-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transform:
+    translate3d(
+      calc(var(--pointer-x) * -11px * var(--motion-factor)),
+      calc(var(--pointer-y) * -9px * var(--motion-factor)),
+      0
+    )
+    scale(1.03);
+  filter: brightness(0.9) contrast(1.05) saturate(0.93);
+  transition:
+    opacity 700ms ease,
+    filter 700ms ease;
+  opacity: 0.98;
+  z-index: -5;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.start-shell.is-mounted .start-background {
+  filter: brightness(0.94) contrast(1.08) saturate(0.98);
+}
+
+.start-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 43%, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 22%, rgba(255, 255, 255, 0) 42%),
+    radial-gradient(circle at center, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, 0.32) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.32) 100%);
+  z-index: -1;
+}
+
+.start-stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    radial-gradient(rgba(255, 255, 255, 0.042) 1px, transparent 1px);
+  background-size: 100% 3px, 6px 6px;
+  opacity: 0.06;
+  mix-blend-mode: soft-light;
+  z-index: 0;
+}
+
+.start-decor {
+  position: absolute;
+  z-index: 3;
+  opacity: 0;
+  transform: translate3d(0, 12px, 0) scale(0.98);
+  transition:
+    opacity 700ms ease,
+    transform 820ms cubic-bezier(0.17, 0.84, 0.44, 1);
+  transition-delay: var(--enter-delay, 0ms);
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.start-shell.is-mounted .start-decor {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.start-decor-float {
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.start-decor-float img {
+  display: block;
+  width: 100%;
+  height: auto;
+  will-change: transform, filter;
+  transform:
+    translate3d(
+      calc(var(--pointer-x) * var(--parallax-x, 0px) * var(--motion-factor)),
+      calc(var(--pointer-y) * var(--parallax-y, 0px) * var(--motion-factor)),
+      0
+    )
+    rotate(var(--tilt, 0deg))
+    scale(var(--decor-scale, 1));
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.34));
+  transition:
+    transform 220ms ease,
+    filter 220ms ease;
+}
+
+.start-decor:hover .start-decor-float img {
+  --decor-scale: var(--hover-scale, 1.04);
+  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.48));
+}
+
+.start-handcuffs {
+  left: 60px;
+  top: 104px;
+  width: 258px;
+}
+
+.start-handprint {
+  right: 18px;
+  bottom: 2px;
+  width: 314px;
+}
+
+.filechart-wrap {
+  position: absolute;
+  left: 50%;
+  top: 53.8%;
+  width: 1102px;
+  transform:
+    translate3d(
+      calc(-50% + var(--pointer-x) * 5px * var(--motion-factor)),
+      calc(-50% + var(--pointer-y) * 4px * var(--motion-factor)),
+      0
+    )
+    scale(0.99);
+  opacity: 0;
+  transition:
+    opacity 720ms ease,
+    transform 860ms cubic-bezier(0.17, 0.84, 0.44, 1);
+  z-index: 2;
+}
+
+.start-shell.is-mounted .filechart-wrap {
+  opacity: 1;
+  transform: translate3d(calc(-50%), calc(-50%), 0) scale(1);
+}
+
+.filechart {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+  filter: drop-shadow(0 28px 36px rgba(0, 0, 0, 0.3));
+}
+
+.case-sheet {
+  position: absolute;
+  left: 54.1%;
+  top: 21%;
+  width: 36.2%;
+  height: 69%;
+  display: flex;
+}
+
+.case-table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: 'Joseon100Years', serif;
+  color: #191411;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.case-row {
+  transition:
+    background-color 220ms ease,
+    transform 220ms ease;
+}
+
+.case-row:nth-child(1) {
+  height: 15.5%;
+}
+
+.case-row:nth-child(2) {
+  height: 15.5%;
+}
+
+.case-row:nth-child(3) {
+  height: 17%;
+}
+
+.case-row:nth-child(4) {
+  height: 18.5%;
+}
+
+.case-row:nth-child(5) {
+  height: 33.5%;
+}
+
+.case-label,
+.case-value {
+  border: 1.5px solid rgba(39, 31, 25, 0.95);
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.case-label {
+  width: 24.8%;
+  padding: 5px 4px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 11.8px;
+  line-height: 1.06;
+  letter-spacing: 0.01em;
+  word-break: keep-all;
+}
+
+.case-value {
+  padding: 11px 13px 10px 13px;
+  vertical-align: top;
+  font-size: 12.6px;
+  line-height: 1.28;
+  letter-spacing: 0.005em;
+  word-break: keep-all;
+  white-space: pre-line;
+}
+
+.case-value.is-note {
+  font-size: 12px;
+  line-height: 1.38;
+}
+
+.case-label-text,
+.case-text {
+  position: relative;
+  z-index: 1;
+}
+
+.case-label-text {
+  white-space: pre-line;
+}
+
+.case-row.is-active {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 1px;
+  height: 1.02em;
+  margin-left: 2px;
+  vertical-align: -0.13em;
+  background: rgba(28, 20, 17, 0.96);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.22);
+  animation: cursor-blink 1.02s steps(1) infinite;
+}
+
+.start-actions {
+  position: absolute;
+  left: 50%;
+  bottom: 52px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  z-index: 4;
+}
+
+.start-action {
+  position: relative;
+  min-width: 152px;
+  padding: 13px 28px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.46) 0%, rgba(5, 5, 5, 0.3) 100%);
+  color: #f5f0e8;
+  font-family: 'Joseon100Years', serif;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.24);
+  transition:
+    transform 180ms ease,
+    border-color 220ms ease,
+    background 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease,
+    filter 220ms ease;
+}
+
+.start-action::before {
+  content: '';
+  position: absolute;
+  inset: -30% auto -30% -56%;
+  width: 44%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 35%,
+    rgba(255, 255, 255, 0.24) 50%,
+    rgba(255, 255, 255, 0.1) 65%,
+    transparent 100%
+  );
+  transform: translateX(-170%) skewX(-18deg);
+  transition: transform 800ms ease;
+  pointer-events: none;
+}
+
+.start-action::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 85, 85, 0);
+  opacity: 0;
+  box-shadow: 0 0 0 0 rgba(255, 76, 76, 0);
+  transition:
+    opacity 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+  pointer-events: none;
+}
+
+.start-action:hover {
+  border-color: rgba(255, 255, 255, 0.54);
+  background: linear-gradient(180deg, rgba(24, 24, 24, 0.62) 0%, rgba(8, 8, 8, 0.44) 100%);
+  color: #fffdf8;
+  box-shadow:
+    0 18px 28px rgba(0, 0, 0, 0.3),
+    0 0 16px rgba(154, 41, 41, 0.08);
+  filter: brightness(1.04);
+}
+
+.start-action:hover::before {
+  transform: translateX(520%) skewX(-18deg);
+}
+
+.start-action:hover::after {
+  opacity: 1;
+  border-color: rgba(255, 94, 94, 0.26);
+  box-shadow:
+    0 0 0 1px rgba(255, 94, 94, 0.08),
+    0 0 18px rgba(255, 82, 82, 0.12);
+}
+
+.start-action:active {
+  transform: translateY(2px) scale(0.985);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.18);
+}
+
+.start-action:focus-visible {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.62);
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.08),
+    0 0 0 4px rgba(255, 74, 74, 0.12),
+    0 16px 24px rgba(0, 0, 0, 0.28);
+}
+
+.start-action--secondary {
+  background: linear-gradient(180deg, rgba(12, 12, 12, 0.3) 0%, rgba(6, 6, 6, 0.18) 100%);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.start-shell.reduce-motion .start-background,
+.start-shell.reduce-motion .shell-backdrop,
+.start-shell.reduce-motion .start-decor,
+.start-shell.reduce-motion .filechart-wrap,
+.start-shell.reduce-motion .start-action {
+  transition-duration: 1ms;
+}
+
+@keyframes cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
