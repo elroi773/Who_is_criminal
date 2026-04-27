@@ -267,6 +267,10 @@ function Start({ onInvestigate, onSkip }) {
             '--tilt': '-11deg',
           }}
         />
+        <div className="title">
+          <p>사건 번호 01</p>
+          <h1>실습실 살인사건</h1>
+        </div>
 
         <div className="filechart-wrap">
           <img className="filechart" src={filechart} alt="" aria-hidden="true" draggable="false" />

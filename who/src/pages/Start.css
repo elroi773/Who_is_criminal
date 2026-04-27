@@ -175,20 +175,20 @@
 
 .start-handcuffs {
   left: 60px;
-  top: 104px;
+  top: 180px;
   width: 258px;
 }
 
 .start-handprint {
-  right: 18px;
-  bottom: 2px;
+  right: 90px;
+  bottom: 10px;
   width: 314px;
 }
 
 .filechart-wrap {
   position: absolute;
   left: 50%;
-  top: 53.8%;
+  top: 48%;
   width: 1102px;
   transform:
     translate3d(
@@ -221,10 +221,10 @@
 
 .case-sheet {
   position: absolute;
-  left: 54.1%;
-  top: 21%;
-  width: 36.2%;
-  height: 69%;
+  left: 51%;
+  top: 26%;
+  width: 30%;
+  height: 59%;
   display: flex;
 }
 
@@ -448,4 +448,14 @@
   100% {
     opacity: 0;
   }
+}
+
+.title {
+  font-family: 'Joseon100Years';
+  position: absolute;
+  left: 50%;
+  top: 80px;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #f5f0e8;
 }
