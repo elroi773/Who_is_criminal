@@ -9,7 +9,7 @@ const STAGE_WIDTH = 1440
 const STAGE_HEIGHT = 1024
 
 const CASE_ROWS = [
-  { label: '피해자 이름', value: '김이레' },
+  { label: '피해자 이름', value: '김이리' },
   { label: '사망장소', value: '실습실' },
   { label: '사망 추정 시간', value: 'PM 21:20 ~ 21:40' },
   { label: '특이 사항', value: '미림 마이스터고 소프트웨어과 전교 1등' },
