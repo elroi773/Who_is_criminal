@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-route
 import Intro from './pages/Intro'
 import Start from './pages/Start'
 import Incidentscene from './pages/Incidentscene'
+import InputName from './pages/InputName'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Route path="/" element={<IntroRoute />} />
         <Route path="/start" element={<StartRoute />} />
         <Route path="/incidentscene" element={<Incidentscene />} />
+        <Route path="/inputname" element={<InputName />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
@@ -19,7 +21,7 @@ function App() {
 function IntroRoute() {
   const navigate = useNavigate()
 
-  return <Intro onPlay={() => navigate('/start')} />
+  return <Intro onPlay={() => navigate('/inputname')} />
 }
 
 function StartRoute() {
